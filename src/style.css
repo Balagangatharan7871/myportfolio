@@ -1,0 +1,121 @@
+@import "tailwindcss";
+
+@theme {
+  /* Colors */
+  --color-background: #0B0E14;
+  --color-primary: #00D4FF;
+  --color-secondary: #8A2BE2;
+
+  /* Fonts */
+  --font-sans: 'Inter', 'Montserrat', sans-serif;
+  --text-fluid-h1: clamp(2.5rem, 5vw + 1rem, 4.5rem);
+  --text-fluid-h2: clamp(1.8rem, 3vw + 1rem, 3rem);
+
+  /* Animations */
+  --animate-marquee: marquee 25s linear infinite;
+  --animate-marquee2: marquee2 25s linear infinite;
+  --animate-scan: scan 4s ease-in-out infinite;
+
+  @keyframes ticker-scroll {
+    0% {
+      transform: translateX(0);
+    }
+    100% {
+      transform: translateX(-50%);
+    }
+  }
+
+  @keyframes marquee {
+    0% { transform: translateX(0%); }
+    100% { transform: translateX(-100%); }
+  }
+
+  @keyframes marquee2 {
+    0% { transform: translateX(100%); }
+    100% { transform: translateX(0%); }
+  }
+
+  @keyframes scan {
+    0% { transform: translateY(-150%); opacity: 0; }
+    50% { opacity: 0.5; }
+    100% { transform: translateY(250%); opacity: 0; }
+  }
+
+  @keyframes cursor-blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0; }
+  }
+
+  @keyframes bounce-reverse {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-25px); }
+  }
+}
+
+/* Animation Classes */
+.animate-bounce-reverse {
+  animation: bounce-reverse 2.5s ease-in-out infinite;
+}
+
+.cursor-blink {
+  animation: cursor-blink 1s step-end infinite;
+  color: #22d3ee;
+}
+
+/* Ticker Scrolling Animation */
+.ticker-wrapper {
+  width: 100%;
+  overflow: hidden;
+}
+
+.ticker-content {
+  display: flex;
+  align-items: center;
+  gap: 4rem;
+  animation: ticker-scroll 40s linear infinite;
+  white-space: nowrap;
+  will-change: transform;
+}
+
+.ticker-item {
+  display: inline-block;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: white;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.ticker-separator {
+  color: #22d3ee;
+  font-size: 0.5rem;
+  opacity: 0.4;
+  padding: 0 1rem;
+}
+
+/* Custom Utilities for 3D */
+.perspective-1000 {
+    perspective: 1000px;
+}
+.transform-style-3d {
+    transform-style: preserve-3d;
+}
+.translate-z-0 { transform: translateZ(0px); }
+.translate-z-10 { transform: translateZ(10px); }
+.translate-z-20 { transform: translateZ(20px); }
+.translate-z-30 { transform: translateZ(30px); }
+.translate-z-40 { transform: translateZ(40px); }
+
+/* Custom Utilities */
+@layer utilities {
+  .lowercase-hero {
+    /* Custom specific hero tweaks if needed */
+  }
+}
+
+/* Base Styles */
+@layer base {
+  body {
+    @apply bg-background text-white font-sans;
+  }
+}

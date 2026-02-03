@@ -1,0 +1,20 @@
+import { defineConfig } from 'vite'
+import tailwindcss from '@tailwindcss/vite'
+import { resolve } from 'path'
+
+export default defineConfig({
+    plugins: [
+        tailwindcss(),
+    ],
+    base: '/Myportfolio/', // GitHub repository name
+    build: {
+        rollupOptions: {
+            input: {
+                main: resolve(__dirname, 'index.html'),
+                health: resolve(__dirname, 'case-study-health.html'),
+                agency: resolve(__dirname, 'case-study-agency.html'),
+                dental: resolve(__dirname, 'case-study-dental.html'),
+            }
+        }
+    }
+})
