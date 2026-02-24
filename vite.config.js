@@ -6,7 +6,7 @@ export default defineConfig({
     plugins: [
         tailwindcss(),
     ],
-    base: '/Myportfolio/', // GitHub repository name
+    base: '/myportfolio/', // GitHub repository name (lowercase)
     build: {
         rollupOptions: {
             input: {
@@ -14,6 +14,7 @@ export default defineConfig({
                 health: resolve(__dirname, 'case-study-health.html'),
                 agency: resolve(__dirname, 'case-study-agency.html'),
                 dental: resolve(__dirname, 'case-study-dental.html'),
+                speed: resolve(__dirname, 'case-study-speed.html'),
             }
         }
     }
