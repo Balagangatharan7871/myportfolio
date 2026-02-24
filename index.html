@@ -35,10 +35,9 @@
 
     <!-- Main Header Content -->
     <div class="container mx-auto px-6 h-16 flex items-center justify-between">
-      <a href="index.html" class="flex items-center gap-3">
-        <img src="/images/logo.png" alt="Organic Growth Partner" class="h-10 w-auto">
-        <span class="font-montserrat font-bold text-xl tracking-tight hidden lg:block">
-          Organic Growth <span class="text-primary">Partner</span>
+      <a href="index.html" class="flex items-center gap-2">
+        <span class="font-montserrat font-bold text-xl tracking-tight">
+          Bala's <span class="text-primary">Portfolio</span>
         </span>
       </a>
 
@@ -72,28 +71,89 @@
           </div>
         </div>
 
+        <!-- Problem Solving Studies Dropdown -->
+        <div class="relative group">
+          <button class="flex items-center space-x-1 hover:text-orange-400 transition-colors py-2">
+            <span>PROBLEM SOLVING</span>
+            <i class="ph-bold ph-caret-down"></i>
+          </button>
+          <div
+            class="absolute top-full left-0 w-80 bg-black border border-white/10 rounded-xl shadow-2xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 transform translate-y-2 group-hover:translate-y-0 overflow-hidden">
+            <a href="case-study-speed.html" class="block px-6 py-4 hover:bg-white/5 group/item">
+              <div class="text-orange-400 font-bold mb-1 group-hover/item:translate-x-1 transition-transform">Web Speed
+                Optimization</div>
+              <div class="text-xs text-gray-400">Advanced Performance Engineering</div>
+            </a>
+          </div>
+        </div>
+
       </nav>
 
-      <!-- Right Side: LinkedIn + Email + BOOK A CALL -->
+      <!-- Right Side: LinkedIn + Email + Mobile Hamburger -->
       <div class="flex items-center gap-4">
-        <!-- LinkedIn Link -->
         <a href="https://www.linkedin.com/in/biddablemedia/" target="_blank" rel="noopener noreferrer"
           class="text-white hover:text-[#0077b5] transition-colors text-2xl" title="Connect on LinkedIn">
           <i class="ph-fill ph-linkedin-logo"></i>
         </a>
-
-        <!-- Email Link -->
         <a href="mailto:balagangatharan2001@gmail.com" class="text-white hover:text-primary transition-colors text-2xl"
           title="Send an Email">
           <i class="ph-fill ph-envelope"></i>
         </a>
-
-        <!-- Book a Call Button -->
-        <a href="#booking"
-          class="hidden md:inline-flex items-center justify-center px-6 py-2 text-sm font-bold text-black transition-all duration-200 bg-primary rounded-full hover:bg-white hover:shadow-[0_0_20px_rgba(0,212,255,0.5)] active:scale-95">
-          BOOK A CALL
-        </a>
+        <!-- Mobile Hamburger Button -->
+        <button id="mobile-menu-btn" class="md:hidden flex flex-col gap-1.5 p-1" aria-label="Toggle menu">
+          <span class="block w-6 h-0.5 bg-white transition-all duration-300" id="ham-top"></span>
+          <span class="block w-6 h-0.5 bg-white transition-all duration-300" id="ham-mid"></span>
+          <span class="block w-6 h-0.5 bg-white transition-all duration-300" id="ham-bot"></span>
+        </button>
       </div>
+    </div>
+
+    <!-- Mobile Menu Panel -->
+    <div id="mobile-menu" class="hidden md:hidden bg-black border-t border-white/10 px-6 py-6 space-y-4">
+
+      <!-- PROJECTS Accordion -->
+      <div>
+        <button
+          onclick="this.nextElementSibling.classList.toggle('hidden'); this.querySelector('i').classList.toggle('rotate-180')"
+          class="w-full flex items-center justify-between text-sm font-bold tracking-wide text-gray-300 py-2 hover:text-primary transition-colors">
+          <span>PROJECTS</span>
+          <i class="ph-bold ph-caret-down transition-transform duration-200"></i>
+        </button>
+        <div class="hidden mt-2 space-y-1 pl-2 border-l-2 border-primary/30">
+          <a href="case-study-health.html"
+            class="flex flex-col px-4 py-3 rounded-lg hover:bg-white/5 transition-colors">
+            <span class="text-primary font-bold text-sm">Men's Health Clinic</span>
+            <span class="text-xs text-gray-500">Local SEO &amp; Content Clusters</span>
+          </a>
+          <a href="case-study-agency.html"
+            class="flex flex-col px-4 py-3 rounded-lg hover:bg-white/5 transition-colors">
+            <span class="text-secondary font-bold text-sm">Healthcare Agency</span>
+            <span class="text-xs text-gray-500">B2B &amp; Technical SEO</span>
+          </a>
+          <a href="case-study-dental.html"
+            class="flex flex-col px-4 py-3 rounded-lg hover:bg-white/5 transition-colors">
+            <span class="text-teal-400 font-bold text-sm">Dental Clinic Dubai</span>
+            <span class="text-xs text-gray-500">Hyper-Local Siloing</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- PROBLEM SOLVING Accordion -->
+      <div>
+        <button
+          onclick="this.nextElementSibling.classList.toggle('hidden'); this.querySelector('i').classList.toggle('rotate-180')"
+          class="w-full flex items-center justify-between text-sm font-bold tracking-wide text-gray-300 py-2 hover:text-orange-400 transition-colors">
+          <span>PROBLEM SOLVING</span>
+          <i class="ph-bold ph-caret-down transition-transform duration-200"></i>
+        </button>
+        <div class="hidden mt-2 space-y-1 pl-2 border-l-2 border-orange-400/30">
+          <a href="case-study-speed.html" class="flex flex-col px-4 py-3 rounded-lg hover:bg-white/5 transition-colors">
+            <span class="text-orange-400 font-bold text-sm">Web Speed Optimization</span>
+            <span class="text-xs text-gray-500">Advanced Performance Engineering</span>
+          </a>
+        </div>
+      </div>
+
     </div>
   </header>
 
@@ -594,48 +654,48 @@
             </ul>
           </div>
 
-          <!-- 7. Data Analysis -->
+          <!-- 7. Client Handling -->
           <div
-            class="bg-white/5 border border-white/10 rounded-xl p-6 hover:border-green-400/50 transition-all hover:-translate-y-1 group h-full">
+            class="bg-white/5 border border-white/10 rounded-xl p-6 hover:border-teal-400/50 transition-all hover:-translate-y-1 group h-full">
             <div class="flex items-center gap-4 mb-4 pb-4 border-b border-white/5">
-              <i class="ph-bold ph-database text-3xl text-green-400 group-hover:scale-110 transition-transform"></i>
-              <h3 class="font-bold text-white text-lg">Data Analysis</h3>
+              <i class="ph-bold ph-handshake text-3xl text-teal-400 group-hover:scale-110 transition-transform"></i>
+              <h3 class="font-bold text-white text-lg">Client Handling</h3>
             </div>
             <ul class="space-y-4 text-sm text-gray-400">
               <li>
-                <strong class="block text-white mb-1 text-xs uppercase tracking-wider">Python/R Auto</strong>
-                Scripting for bulk keyword classification and extraction.
+                <strong class="block text-white mb-1 text-xs uppercase tracking-wider">Agency Coordination</strong>
+                Handled client communication end-to-end at a healthcare marketing agency.
               </li>
               <li>
-                <strong class="block text-white mb-1 text-xs uppercase tracking-wider">Predictive Models</strong>
-                Forecasting traffic trends and seasonality via regression.
+                <strong class="block text-white mb-1 text-xs uppercase tracking-wider">Cross-Team Work</strong>
+                Coordinated with design, social media &amp; development teams via Basecamp task assignment.
               </li>
               <li>
-                <strong class="block text-white mb-1 text-xs uppercase tracking-wider">Log Analysis</strong>
-                Diagnosing crawl budget waste from server logs.
+                <strong class="block text-white mb-1 text-xs uppercase tracking-wider">Expectation Management</strong>
+                Translated client goals into actionable briefs and tracked delivery milestones.
               </li>
             </ul>
           </div>
 
-          <!-- 8. AI & Automation -->
+          <!-- 8. Report Creation -->
           <div
-            class="bg-white/5 border border-white/10 rounded-xl p-6 hover:border-purple-400/50 transition-all hover:-translate-y-1 group h-full">
+            class="bg-white/5 border border-white/10 rounded-xl p-6 hover:border-pink-400/50 transition-all hover:-translate-y-1 group h-full">
             <div class="flex items-center gap-4 mb-4 pb-4 border-b border-white/5">
-              <i class="ph-bold ph-robot text-3xl text-purple-400 group-hover:scale-110 transition-transform"></i>
-              <h3 class="font-bold text-white text-lg">AI & Automation</h3>
+              <i class="ph-bold ph-file-text text-3xl text-pink-400 group-hover:scale-110 transition-transform"></i>
+              <h3 class="font-bold text-white text-lg">Report Creation</h3>
             </div>
             <ul class="space-y-4 text-sm text-gray-400">
               <li>
-                <strong class="block text-white mb-1 text-xs uppercase tracking-wider">Agentic Workflows</strong>
-                Building autonomous agents for research and reporting.
+                <strong class="block text-white mb-1 text-xs uppercase tracking-wider">Internal Reporting</strong>
+                Monthly performance dashboards tracking rankings, traffic, and task completion.
               </li>
               <li>
-                <strong class="block text-white mb-1 text-xs uppercase tracking-wider">Programmatic SEO</strong>
-                Deploying quality-controlled mass landing page systems.
+                <strong class="block text-white mb-1 text-xs uppercase tracking-wider">Client Reporting</strong>
+                Clear, visual SEO reports communicating ROI, wins, and next steps to non-technical clients.
               </li>
               <li>
-                <strong class="block text-white mb-1 text-xs uppercase tracking-wider">API Integration</strong>
-                Connecting LLMs with SEO data settings.
+                <strong class="block text-white mb-1 text-xs uppercase tracking-wider">Tools Used</strong>
+                Google Search Console, Semrush, Looker Studio, and custom spreadsheet templates.
               </li>
             </ul>
           </div>
@@ -694,7 +754,7 @@
 
           <!-- Case Study 3: Dental Clinic -->
           <a href="case-study-dental.html"
-            class="group relative block rounded-2xl overflow-hidden border border-white/10 hover:border-teal-400/50 transition-all hover:-translate-y-2 md:col-span-2 lg:col-span-1">
+            class="group relative block rounded-2xl overflow-hidden border border-white/10 hover:border-teal-400/50 transition-all hover:-translate-y-2">
             <div class="bg-gradient-to-br from-gray-900 to-black p-8 h-full">
               <div class="text-xs font-mono text-teal-400 mb-4 flex items-center">
                 <span class="w-2 h-2 rounded-full bg-teal-400 mr-2"></span> HYPER-LOCAL / SILOING
@@ -708,6 +768,27 @@
                 architecture.</p>
               <span
                 class="text-sm font-bold border-b border-teal-400/30 pb-1 group-hover:border-teal-400 transition-colors">Read
+                Case Study &rarr;</span>
+            </div>
+          </a>
+
+          <!-- Case Study 4: Web Speed Optimization -->
+          <a href="case-study-speed.html"
+            class="group relative block rounded-2xl overflow-hidden border border-white/10 hover:border-orange-400/50 transition-all hover:-translate-y-2">
+            <div class="bg-gradient-to-br from-gray-900 to-black p-8 h-full">
+              <div class="text-xs font-mono text-orange-400 mb-4 flex items-center">
+                <span class="w-2 h-2 rounded-full bg-orange-400 mr-2"></span> PERFORMANCE ENGINEERING
+              </div>
+              <h3 class="text-2xl font-bold mb-3 group-hover:text-orange-400 transition-colors">Web Speed Optimization
+              </h3>
+              <div class="flex gap-4 mb-6">
+                <div class="text-sm font-bold text-orange-400">30s → &lt;1s</div>
+                <div class="text-sm font-bold text-gray-500">CS-Level Audit</div>
+              </div>
+              <p class="text-gray-400 text-sm mb-6">When every SEO item was green, we went to the computer science layer
+                to beat the competitor on speed.</p>
+              <span
+                class="text-sm font-bold border-b border-orange-400/30 pb-1 group-hover:border-orange-400 transition-colors">Read
                 Case Study &rarr;</span>
             </div>
           </a>
@@ -786,101 +867,195 @@
       </div>
     </section>
 
-    <!-- Booking Section -->
-    <section id="booking" class="py-20 bg-gradient-to-b from-black via-gray-900 to-black">
-      <div class="container mx-auto px-6 max-w-3xl">
+    <!-- My Interest / Next Move Section -->
+    <section id="interest" class="py-24 bg-gradient-to-b from-black via-gray-900/50 to-black relative overflow-hidden">
+
+      <!-- Background chess-grid texture -->
+      <div class="absolute inset-0 opacity-[0.03]"
+        style="background-image: repeating-linear-gradient(0deg, #fff 0, #fff 1px, transparent 1px, transparent 60px), repeating-linear-gradient(90deg, #fff 0, #fff 1px, transparent 1px, transparent 60px);">
+      </div>
+
+      <div class="container mx-auto px-6 max-w-6xl relative z-10">
 
         <!-- Header -->
-        <div class="text-center mb-12">
-          <h2 class="text-4xl font-bold mb-4">Ready to play the <span class="text-primary">SEO game?</span></h2>
-          <p class="text-gray-400 text-lg">Let's build a data-driven engine for your business.</p>
-        </div>
-
-        <!-- Booking Form Card -->
-        <div
-          class="bg-gradient-to-br from-white/5 to-white/[0.02] border border-white/10 rounded-2xl p-8 md:p-12 backdrop-blur-sm shadow-2xl">
-
-          <form id="booking-form" class="space-y-6">
-
-            <!-- Name Field -->
-            <div>
-              <label for="name" class="block text-sm font-semibold text-white mb-2">
-                Your Name <span class="text-primary">*</span>
-              </label>
-              <input type="text" id="name" name="name" required placeholder="Enter your full name"
-                class="w-full px-4 py-3 bg-black/50 border border-white/20 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/50 transition-all">
-            </div>
-
-            <!-- Email Field -->
-            <div>
-              <label for="email" class="block text-sm font-semibold text-white mb-2">
-                Email Address <span class="text-primary">*</span>
-              </label>
-              <input type="email" id="email" name="email" required placeholder="your.email@example.com"
-                class="w-full px-4 py-3 bg-black/50 border border-white/20 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/50 transition-all">
-            </div>
-
-            <!-- Date Field -->
-            <div>
-              <label for="booking-date" class="block text-sm font-semibold text-white mb-2">
-                Preferred Date <span class="text-primary">*</span>
-              </label>
-              <input type="date" id="booking-date" name="date" required min=""
-                class="w-full px-4 py-3 bg-black/50 border border-white/20 rounded-lg text-white focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/50 transition-all">
-            </div>
-
-            <!-- Time Slot Selection -->
-            <div>
-              <label for="time-slot" class="block text-sm font-semibold text-white mb-2">
-                Preferred Time Slot <span class="text-primary">*</span>
-              </label>
-              <p class="text-xs text-gray-500 mb-3">
-                <i class="ph-clock text-primary"></i> Available: 7:00 PM IST - 7:00 AM IST
-              </p>
-              <select id="time-slot" name="time" required
-                class="w-full px-4 py-3 bg-black/50 border border-white/20 rounded-lg text-white focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/50 transition-all">
-                <option value="" disabled selected>Select a time slot</option>
-                <option value="19:00">7:00 PM - 8:00 PM IST</option>
-                <option value="20:00">8:00 PM - 9:00 PM IST</option>
-                <option value="21:00">9:00 PM - 10:00 PM IST</option>
-                <option value="22:00">10:00 PM - 11:00 PM IST</option>
-                <option value="23:00">11:00 PM - 12:00 AM IST</option>
-                <option value="00:00">12:00 AM - 1:00 AM IST</option>
-                <option value="01:00">1:00 AM - 2:00 AM IST</option>
-                <option value="02:00">2:00 AM - 3:00 AM IST</option>
-                <option value="03:00">3:00 AM - 4:00 AM IST</option>
-                <option value="04:00">4:00 AM - 5:00 AM IST</option>
-                <option value="05:00">5:00 AM - 6:00 AM IST</option>
-                <option value="06:00">6:00 AM - 7:00 AM IST</option>
-              </select>
-            </div>
-
-            <!-- Submit Button -->
-            <div class="pt-4">
-              <button type="submit"
-                class="w-full px-8 py-4 bg-primary text-black font-bold rounded-full hover:bg-white hover:shadow-[0_0_30px_rgba(0,212,255,0.6)] transition-all duration-300 active:scale-95 flex items-center justify-center gap-3 text-lg">
-                <i class="ph-bold ph-calendar-check text-2xl"></i>
-                BOOK A CALL
-              </button>
-            </div>
-
-            <!-- Success Message (Hidden by default) -->
-            <div id="success-message" class="hidden mt-6 p-4 bg-green-500/10 border border-green-500/30 rounded-lg">
-              <p class="text-green-400 text-center font-semibold">
-                <i class="ph-bold ph-check-circle"></i> Booking request submitted! I'll get back to you soon.
-              </p>
-            </div>
-
-          </form>
-
-        </div>
-
-        <!-- Additional Info -->
-        <div class="mt-8 text-center">
-          <p class="text-sm text-gray-500">
-            <i class="ph-info"></i> All times are in Indian Standard Time (IST). I'll confirm your booking via email
-            within 24 hours.
+        <div class="text-center mb-16">
+          <div
+            class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 border border-primary/30 text-primary text-xs font-mono uppercase tracking-widest mb-6">
+            <i class="ph-bold ph-chess-knight"></i>
+            The Next Move
+          </div>
+          <h2 class="text-3xl md:text-4xl font-montserrat font-bold mb-4">
+            Where I Want to <span class="text-primary">Play the Game</span>
+          </h2>
+          <p class="text-gray-400 max-w-2xl mx-auto text-base leading-relaxed">
+            I'm actively looking to expand my skillset and take on SEO challenges at a higher level. Here are the types
+            of companies I'd love to work with next — each one is a different dimension of the game.
           </p>
+        </div>
+
+        <!-- Cards Grid -->
+        <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-14">
+
+          <!-- Card 1: E-Commerce -->
+          <div
+            class="group relative bg-gradient-to-br from-white/5 to-transparent border border-white/10 rounded-2xl p-7 hover:border-primary/40 hover:-translate-y-1 transition-all duration-300">
+            <div
+              class="absolute top-4 right-4 opacity-10 text-6xl text-primary group-hover:opacity-20 transition-opacity">
+              <i class="ph-bold ph-storefront"></i>
+            </div>
+            <div class="w-11 h-11 rounded-xl bg-primary/10 flex items-center justify-center text-primary text-xl mb-5">
+              <i class="ph-bold ph-storefront"></i>
+            </div>
+            <h3 class="text-white font-bold text-lg mb-2">E-Commerce Brands</h3>
+            <p class="text-gray-400 text-sm leading-relaxed">Huge product catalogs, faceted navigation, seasonal crawl
+              strategy — this is where programmatic SEO and crawl budget management become real engineering problems.
+            </p>
+            <div class="mt-4 flex flex-wrap gap-2">
+              <span
+                class="px-2 py-1 bg-primary/10 border border-primary/20 rounded-full text-xs text-primary">Programmatic
+                SEO</span>
+              <span class="px-2 py-1 bg-white/5 border border-white/10 rounded-full text-xs text-gray-400">Crawl
+                Budget</span>
+            </div>
+          </div>
+
+          <!-- Card 2: SaaS -->
+          <div
+            class="group relative bg-gradient-to-br from-white/5 to-transparent border border-white/10 rounded-2xl p-7 hover:border-secondary/40 hover:-translate-y-1 transition-all duration-300">
+            <div
+              class="absolute top-4 right-4 opacity-10 text-6xl text-secondary group-hover:opacity-20 transition-opacity">
+              <i class="ph-bold ph-cloud"></i>
+            </div>
+            <div
+              class="w-11 h-11 rounded-xl bg-secondary/10 flex items-center justify-center text-secondary text-xl mb-5">
+              <i class="ph-bold ph-cloud"></i>
+            </div>
+            <h3 class="text-white font-bold text-lg mb-2">SaaS Platforms</h3>
+            <p class="text-gray-400 text-sm leading-relaxed">Bottom-of-funnel product-led SEO, feature comparison pages,
+              and ranking for high-intent keywords that convert. Complex JS architectures that require real technical
+              SEO depth.</p>
+            <div class="mt-4 flex flex-wrap gap-2">
+              <span
+                class="px-2 py-1 bg-secondary/10 border border-secondary/20 rounded-full text-xs text-secondary">Product-Led
+                SEO</span>
+              <span class="px-2 py-1 bg-white/5 border border-white/10 rounded-full text-xs text-gray-400">JavaScript
+                SEO</span>
+            </div>
+          </div>
+
+          <!-- Card 3: News / Media -->
+          <div
+            class="group relative bg-gradient-to-br from-white/5 to-transparent border border-white/10 rounded-2xl p-7 hover:border-orange-400/40 hover:-translate-y-1 transition-all duration-300">
+            <div
+              class="absolute top-4 right-4 opacity-10 text-6xl text-orange-400 group-hover:opacity-20 transition-opacity">
+              <i class="ph-bold ph-newspaper"></i>
+            </div>
+            <div
+              class="w-11 h-11 rounded-xl bg-orange-400/10 flex items-center justify-center text-orange-400 text-xl mb-5">
+              <i class="ph-bold ph-newspaper"></i>
+            </div>
+            <h3 class="text-white font-bold text-lg mb-2">News &amp; Media Sites</h3>
+            <p class="text-gray-400 text-sm leading-relaxed">Hundreds of thousands of URLs, indexing logic at scale,
+              canonicalization at volume, and real-time crawl prioritization. The kind of complexity that demands
+              systems thinking.</p>
+            <div class="mt-4 flex flex-wrap gap-2">
+              <span
+                class="px-2 py-1 bg-orange-400/10 border border-orange-400/20 rounded-full text-xs text-orange-400">Indexing
+                at Scale</span>
+              <span
+                class="px-2 py-1 bg-white/5 border border-white/10 rounded-full text-xs text-gray-400">Canonicalization</span>
+            </div>
+          </div>
+
+          <!-- Card 4: Healthcare / Multi-Location -->
+          <div
+            class="group relative bg-gradient-to-br from-white/5 to-transparent border border-white/10 rounded-2xl p-7 hover:border-green-400/40 hover:-translate-y-1 transition-all duration-300">
+            <div
+              class="absolute top-4 right-4 opacity-10 text-6xl text-green-400 group-hover:opacity-20 transition-opacity">
+              <i class="ph-bold ph-map-pin"></i>
+            </div>
+            <div
+              class="w-11 h-11 rounded-xl bg-green-400/10 flex items-center justify-center text-green-400 text-xl mb-5">
+              <i class="ph-bold ph-map-pin"></i>
+            </div>
+            <h3 class="text-white font-bold text-lg mb-2">Multi-Location Brands</h3>
+            <p class="text-gray-400 text-sm leading-relaxed">Restaurant chains, clinic networks, franchise groups —
+              local SEO at scale with location page architecture, Google Business optimization, and hyper-local topical
+              silos.</p>
+            <div class="mt-4 flex flex-wrap gap-2">
+              <span
+                class="px-2 py-1 bg-green-400/10 border border-green-400/20 rounded-full text-xs text-green-400">Local
+                SEO</span>
+              <span class="px-2 py-1 bg-white/5 border border-white/10 rounded-full text-xs text-gray-400">GBP
+                Strategy</span>
+            </div>
+          </div>
+
+          <!-- Card 5: Digital Agencies -->
+          <div
+            class="group relative bg-gradient-to-br from-white/5 to-transparent border border-white/10 rounded-2xl p-7 hover:border-teal-400/40 hover:-translate-y-1 transition-all duration-300">
+            <div
+              class="absolute top-4 right-4 opacity-10 text-6xl text-teal-400 group-hover:opacity-20 transition-opacity">
+              <i class="ph-bold ph-buildings"></i>
+            </div>
+            <div
+              class="w-11 h-11 rounded-xl bg-teal-400/10 flex items-center justify-center text-teal-400 text-xl mb-5">
+              <i class="ph-bold ph-buildings"></i>
+            </div>
+            <h3 class="text-white font-bold text-lg mb-2">Growth-Focused Agencies</h3>
+            <p class="text-gray-400 text-sm leading-relaxed">Agencies running multi-client SEO operations where I can
+              contribute technical depth, structured client reporting, and cross-team coordination at pace. Already have
+              agency experience.</p>
+            <div class="mt-4 flex flex-wrap gap-2">
+              <span
+                class="px-2 py-1 bg-teal-400/10 border border-teal-400/20 rounded-full text-xs text-teal-400">Multi-Client</span>
+              <span
+                class="px-2 py-1 bg-white/5 border border-white/10 rounded-full text-xs text-gray-400">Reporting</span>
+            </div>
+          </div>
+
+          <!-- Card 6: Enterprise / B2B -->
+          <div
+            class="group relative bg-gradient-to-br from-white/5 to-transparent border border-white/10 rounded-2xl p-7 hover:border-yellow-400/40 hover:-translate-y-1 transition-all duration-300">
+            <div
+              class="absolute top-4 right-4 opacity-10 text-6xl text-yellow-400 group-hover:opacity-20 transition-opacity">
+              <i class="ph-bold ph-briefcase"></i>
+            </div>
+            <div
+              class="w-11 h-11 rounded-xl bg-yellow-400/10 flex items-center justify-center text-yellow-400 text-xl mb-5">
+              <i class="ph-bold ph-briefcase"></i>
+            </div>
+            <h3 class="text-white font-bold text-lg mb-2">Enterprise &amp; B2B</h3>
+            <p class="text-gray-400 text-sm leading-relaxed">Long sales cycles, high-authority content, thought
+              leadership SEO, and ranking for niche commercial intent keywords with precision. Where the technical and
+              strategic game intersect.</p>
+            <div class="mt-4 flex flex-wrap gap-2">
+              <span
+                class="px-2 py-1 bg-yellow-400/10 border border-yellow-400/20 rounded-full text-xs text-yellow-400">B2B
+                Strategy</span>
+              <span class="px-2 py-1 bg-white/5 border border-white/10 rounded-full text-xs text-gray-400">Authority
+                SEO</span>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Bottom Call-to-Action Bar -->
+        <div
+          class="bg-gradient-to-r from-primary/10 via-transparent to-secondary/10 border border-white/10 rounded-2xl p-8 text-center">
+          <p class="text-white font-bold text-lg mb-2">Ready to play the SEO game at the next level?</p>
+          <p class="text-gray-400 text-sm mb-6">I bring technical depth, structured thinking, and a genuine love for the
+            game — whether it's a startup, scale-up, or enterprise.</p>
+          <div class="flex flex-wrap justify-center gap-4">
+            <a href="https://www.linkedin.com/in/biddablemedia/" target="_blank" rel="noopener noreferrer"
+              class="inline-flex items-center gap-2 px-7 py-3 bg-primary text-black font-bold rounded-full hover:bg-white hover:shadow-[0_0_20px_rgba(0,212,255,0.4)] transition-all duration-200 active:scale-95">
+              <i class="ph-fill ph-linkedin-logo"></i> Connect on LinkedIn
+            </a>
+            <a href="mailto:balagangatharan2001@gmail.com"
+              class="inline-flex items-center gap-2 px-7 py-3 border border-white/20 text-white font-bold rounded-full hover:border-primary hover:text-primary transition-all duration-200 active:scale-95">
+              <i class="ph-bold ph-envelope"></i> Send an Email
+            </a>
+          </div>
         </div>
 
       </div>
@@ -891,11 +1066,34 @@
   <!-- Footer -->
   <footer class="border-t border-white/10 py-12 bg-black">
     <div class="container mx-auto px-6 text-center text-gray-600">
-      <p>&copy; 2024 Organic Growth Partner. All rights reserved.</p>
+      <p>&copy; 2025 Balagangatharan J. All rights reserved.</p>
     </div>
   </footer>
 
   <script type="module" src="/src/main.js"></script>
+
+  <script>
+    // Mobile hamburger menu toggle
+    const btn = document.getElementById('mobile-menu-btn');
+    const menu = document.getElementById('mobile-menu');
+    const top = document.getElementById('ham-top');
+    const mid = document.getElementById('ham-mid');
+    const bot = document.getElementById('ham-bot');
+
+    btn.addEventListener('click', () => {
+      menu.classList.toggle('hidden');
+      // Animate to X
+      if (menu.classList.contains('hidden')) {
+        top.style.transform = '';
+        mid.style.opacity = '1';
+        bot.style.transform = '';
+      } else {
+        top.style.transform = 'translateY(8px) rotate(45deg)';
+        mid.style.opacity = '0';
+        bot.style.transform = 'translateY(-8px) rotate(-45deg)';
+      }
+    });
+  </script>
 </body>
 
 </html>

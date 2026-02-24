@@ -1,0 +1,897 @@
+<!doctype html>
+<html lang="en" class="scroll-smooth">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Case Study: Advanced Web Speed Optimization - SEO Architect</title>
+    <meta name="description"
+        content="A deep-dive performance audit revealing how computer-science-level engineering — server-side caching and media optimization — cut a 30-second load time to under 1 second." />
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Montserrat:wght@700;800&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="/src/style.css">
+    <!-- Icon Library -->
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+
+    <style>
+        @keyframes pulse-glow {
+
+            0%,
+            100% {
+                box-shadow: 0 0 0 0 rgba(251, 146, 60, 0);
+            }
+
+            50% {
+                box-shadow: 0 0 20px 4px rgba(251, 146, 60, 0.3);
+            }
+        }
+
+        .pulse-orange {
+            animation: pulse-glow 2.5s ease-in-out infinite;
+        }
+
+        @keyframes counter-up {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .animate-counter {
+            animation: counter-up 0.6s ease-out forwards;
+        }
+
+        .checklist-item.done .check-icon {
+            color: #4ade80;
+        }
+
+        .checklist-item.done .item-label {
+            color: #d1d5db;
+        }
+
+        .timeline-line::before {
+            content: '';
+            position: absolute;
+            left: 19px;
+            top: 40px;
+            bottom: 0;
+            width: 2px;
+            background: linear-gradient(to bottom, #f97316, transparent);
+        }
+
+        .bar-fill {
+            height: 8px;
+            border-radius: 4px;
+            transition: width 1.2s ease-out;
+        }
+
+        .code-block {
+            background: #0d1117;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 12px;
+            padding: 1.25rem 1.5rem;
+            font-family: 'Courier New', monospace;
+            font-size: 0.8rem;
+            line-height: 1.7;
+            overflow-x: auto;
+        }
+
+        .code-comment {
+            color: #6b7280;
+        }
+
+        .code-attr {
+            color: #93c5fd;
+        }
+
+        .code-val {
+            color: #86efac;
+        }
+
+        .code-tag {
+            color: #f9a8d4;
+        }
+    </style>
+</head>
+
+<body class="bg-background text-white antialiased overflow-x-hidden selection:bg-orange-400 selection:text-black">
+
+    <!-- Header -->
+    <header
+        class="fixed top-0 w-full z-50 transition-all duration-300 backdrop-blur-md bg-background/70 border-b border-white/10">
+        <div class="container mx-auto px-6 h-20 flex items-center justify-between">
+            <a href="index.html" class="flex items-center gap-3">
+                <span class="font-montserrat font-bold text-xl tracking-tight">
+                    Bala's <span class="text-primary">Portfolio</span>
+                </span>
+            </a>
+
+            <nav class="hidden md:flex space-x-6 text-sm font-semibold tracking-wide text-gray-300 items-center">
+
+                <!-- Projects Dropdown -->
+                <div class="relative group">
+                    <button class="flex items-center space-x-1 hover:text-primary transition-colors py-2">
+                        <span>PROJECTS</span>
+                        <i class="ph-bold ph-caret-down"></i>
+                    </button>
+                    <div
+                        class="absolute top-full left-0 w-80 bg-black border border-white/10 rounded-xl shadow-2xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 transform translate-y-2 group-hover:translate-y-0 overflow-hidden">
+                        <a href="case-study-health.html"
+                            class="block px-6 py-4 hover:bg-white/5 border-b border-white/5 group/item">
+                            <div
+                                class="text-primary font-bold mb-1 group-hover/item:translate-x-1 transition-transform">
+                                Men's Health Clinic</div>
+                            <div class="text-xs text-gray-400">Local SEO &amp; Content Clusters</div>
+                        </a>
+                        <a href="case-study-agency.html"
+                            class="block px-6 py-4 hover:bg-white/5 border-b border-white/5 group/item">
+                            <div
+                                class="text-secondary font-bold mb-1 group-hover/item:translate-x-1 transition-transform">
+                                Healthcare Agency</div>
+                            <div class="text-xs text-gray-400">B2B &amp; Technical SEO</div>
+                        </a>
+                        <a href="case-study-dental.html" class="block px-6 py-4 hover:bg-white/5 group/item">
+                            <div
+                                class="text-teal-400 font-bold mb-1 group-hover/item:translate-x-1 transition-transform">
+                                Dental Clinic Dubai</div>
+                            <div class="text-xs text-gray-400">Hyper-Local Siloing</div>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Problem Solving Dropdown -->
+                <div class="relative group">
+                    <button class="flex items-center space-x-1 hover:text-orange-400 transition-colors py-2">
+                        <span>PROBLEM SOLVING</span>
+                        <i class="ph-bold ph-caret-down"></i>
+                    </button>
+                    <div
+                        class="absolute top-full left-0 w-80 bg-black border border-white/10 rounded-xl shadow-2xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 transform translate-y-2 group-hover:translate-y-0 overflow-hidden">
+                        <!-- Current Page -->
+                        <a href="case-study-speed.html"
+                            class="block px-6 py-4 bg-white/5 border-l-2 border-orange-400 group/item">
+                            <div class="text-orange-400 font-bold mb-1">Web Speed Optimization</div>
+                            <div class="text-xs text-gray-400">Advanced Performance Engineering</div>
+                        </a>
+                    </div>
+                </div>
+
+            </nav>
+        </div>
+    </header>
+
+    <main class="pt-32 pb-20">
+
+        <!-- Breadcrumbs -->
+        <div class="container mx-auto px-6 mb-8">
+            <nav aria-label="Breadcrumb">
+                <ol class="flex items-center gap-2 text-sm text-gray-500">
+                    <li><a href="index.html" class="hover:text-primary transition-colors">Home</a></li>
+                    <li><i class="ph-bold ph-caret-right text-xs"></i></li>
+                    <li><span class="text-gray-400">Problem Solving</span></li>
+                    <li><i class="ph-bold ph-caret-right text-xs"></i></li>
+                    <li class="text-orange-400 font-medium">Web Speed Optimization</li>
+                </ol>
+            </nav>
+        </div>
+        <div class="fixed inset-0 z-[-1] pointer-events-none">
+            <div
+                class="absolute top-20 left-1/2 -translate-x-1/2 w-[700px] h-[700px] bg-orange-500/8 rounded-full blur-[128px]">
+            </div>
+            <div class="absolute bottom-40 right-0 w-[400px] h-[400px] bg-red-500/5 rounded-full blur-[100px]"></div>
+        </div>
+
+        <div class="container mx-auto px-6">
+
+            <!-- ── HERO ── -->
+            <div class="text-center max-w-4xl mx-auto mb-6">
+                <div
+                    class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-orange-500/10 border border-orange-500/30 text-orange-400 text-xs font-mono uppercase tracking-widest mb-6">
+                    <i class="ph-bold ph-lightning"></i>
+                    Advanced Performance Engineering
+                </div>
+                <h1 class="text-3xl md:text-5xl font-montserrat font-bold mb-6 leading-tight">
+                    Beyond the Checklist:<br />
+                    <span class="text-orange-400">Web Speed Optimization</span><br />
+                    <span class="text-gray-400 text-2xl md:text-3xl font-normal">at the Computer Science Level</span>
+                </h1>
+                <p class="text-gray-400 text-lg max-w-2xl mx-auto">
+                    Every standard SEO task was complete. The checklist was green. Yet the client's site took <strong
+                        class="text-red-400">30+ seconds</strong> to load while the competitor served content in <strong
+                        class="text-green-400">1.35 seconds</strong>. This is how we found the real problem.
+                </p>
+            </div>
+
+            <!-- Competitor Benchmark Bar -->
+            <div class="max-w-3xl mx-auto mb-20">
+                <div class="bg-gradient-to-r from-gray-900 to-black border border-white/10 rounded-2xl p-6 md:p-8">
+                    <p class="text-xs font-mono text-gray-500 uppercase tracking-widest mb-6 text-center">Load Time
+                        Benchmark — Homepage</p>
+                    <div class="space-y-5">
+                        <!-- Client -->
+                        <div>
+                            <div class="flex justify-between items-center mb-2">
+                                <span class="text-sm font-bold text-white">My Client's Site</span>
+                                <span class="text-sm font-bold text-red-400 font-mono">29,990 ms</span>
+                            </div>
+                            <div class="w-full bg-white/5 rounded-full h-3 overflow-hidden">
+                                <div class="bar-fill bg-gradient-to-r from-red-600 to-red-400" style="width:100%"></div>
+                            </div>
+                        </div>
+                        <!-- Competitor -->
+                        <div>
+                            <div class="flex justify-between items-center mb-2">
+                                <span class="text-sm font-bold text-white">Competitor's Site</span>
+                                <span class="text-sm font-bold text-green-400 font-mono">1,350 ms</span>
+                            </div>
+                            <div class="w-full bg-white/5 rounded-full h-3 overflow-hidden">
+                                <div class="bar-fill bg-gradient-to-r from-green-500 to-green-400" style="width:4.5%">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="text-center text-xs text-gray-600 mt-6 font-mono">Competitor's Site is <span
+                            class="text-green-400 font-bold">22× faster</span> — with identical on-page SEO scores</p>
+                </div>
+            </div>
+
+            <!-- ── SECTION 1: SEO CHECKLIST ALL GREEN ── -->
+            <section class="mb-24 max-w-5xl mx-auto">
+                <div class="text-center mb-12">
+                    <h2 class="text-3xl font-bold mb-3">Phase 1: The <span class="text-green-400">SEO Audit</span> — All
+                        Clear</h2>
+                    <p class="text-gray-400 max-w-xl mx-auto">Before engineering, we ran the full SEO checklist. Every
+                        standard item was audited and resolved.</p>
+                </div>
+
+                <div class="bg-gradient-to-br from-gray-900 to-black border border-white/10 rounded-2xl p-8">
+                    <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-8">
+                        <!-- Checklist items -->
+                        <div
+                            class="checklist-item done flex items-center gap-3 bg-white/5 rounded-xl px-4 py-3 border border-white/5">
+                            <i class="ph-bold ph-check-circle check-icon text-green-400 text-xl shrink-0"></i>
+                            <span class="item-label text-sm text-gray-300">Title Tag Optimisation</span>
+                        </div>
+                        <div
+                            class="checklist-item done flex items-center gap-3 bg-white/5 rounded-xl px-4 py-3 border border-white/5">
+                            <i class="ph-bold ph-check-circle check-icon text-green-400 text-xl shrink-0"></i>
+                            <span class="item-label text-sm text-gray-300">Meta Description Tags</span>
+                        </div>
+                        <div
+                            class="checklist-item done flex items-center gap-3 bg-white/5 rounded-xl px-4 py-3 border border-white/5">
+                            <i class="ph-bold ph-check-circle check-icon text-green-400 text-xl shrink-0"></i>
+                            <span class="item-label text-sm text-gray-300">Image Alt Attributes</span>
+                        </div>
+                        <div
+                            class="checklist-item done flex items-center gap-3 bg-white/5 rounded-xl px-4 py-3 border border-white/5">
+                            <i class="ph-bold ph-check-circle check-icon text-green-400 text-xl shrink-0"></i>
+                            <span class="item-label text-sm text-gray-300">On-Page Keyword Usage</span>
+                        </div>
+                        <div
+                            class="checklist-item done flex items-center gap-3 bg-white/5 rounded-xl px-4 py-3 border border-white/5">
+                            <i class="ph-bold ph-check-circle check-icon text-green-400 text-xl shrink-0"></i>
+                            <span class="item-label text-sm text-gray-300">Schema / Structured Data</span>
+                        </div>
+                        <div
+                            class="checklist-item done flex items-center gap-3 bg-white/5 rounded-xl px-4 py-3 border border-white/5">
+                            <i class="ph-bold ph-check-circle check-icon text-green-400 text-xl shrink-0"></i>
+                            <span class="item-label text-sm text-gray-300">llms.txt Implementation</span>
+                        </div>
+                        <div
+                            class="checklist-item done flex items-center gap-3 bg-white/5 rounded-xl px-4 py-3 border border-white/5">
+                            <i class="ph-bold ph-check-circle check-icon text-green-400 text-xl shrink-0"></i>
+                            <span class="item-label text-sm text-gray-300">Mobile PageSpeed Insights</span>
+                        </div>
+                        <div
+                            class="checklist-item done flex items-center gap-3 bg-white/5 rounded-xl px-4 py-3 border border-white/5">
+                            <i class="ph-bold ph-check-circle check-icon text-green-400 text-xl shrink-0"></i>
+                            <span class="item-label text-sm text-gray-300">Desktop PageSpeed Insights</span>
+                        </div>
+                        <div
+                            class="checklist-item done flex items-center gap-3 bg-white/5 rounded-xl px-4 py-3 border border-white/5">
+                            <i class="ph-bold ph-check-circle check-icon text-green-400 text-xl shrink-0"></i>
+                            <span class="item-label text-sm text-gray-300">DMARC Mail Record</span>
+                        </div>
+                        <div
+                            class="checklist-item done flex items-center gap-3 bg-white/5 rounded-xl px-4 py-3 border border-white/5">
+                            <i class="ph-bold ph-check-circle check-icon text-green-400 text-xl shrink-0"></i>
+                            <span class="item-label text-sm text-gray-300">SPF Mail Record</span>
+                        </div>
+                        <div
+                            class="checklist-item done flex items-center gap-3 bg-white/5 rounded-xl px-4 py-3 border border-white/5">
+                            <i class="ph-bold ph-check-circle check-icon text-green-400 text-xl shrink-0"></i>
+                            <span class="item-label text-sm text-gray-300">Remove Inline Styles</span>
+                        </div>
+                        <div
+                            class="checklist-item done flex items-center gap-3 bg-white/5 rounded-xl px-4 py-3 border border-white/5">
+                            <i class="ph-bold ph-check-circle check-icon text-green-400 text-xl shrink-0"></i>
+                            <span class="item-label text-sm text-gray-300">Resolve JS Errors</span>
+                        </div>
+                        <div
+                            class="checklist-item done flex items-center gap-3 bg-white/5 rounded-xl px-4 py-3 border border-white/5">
+                            <i class="ph-bold ph-check-circle check-icon text-green-400 text-xl shrink-0"></i>
+                            <span class="item-label text-sm text-gray-300">Reduce Rendered Content</span>
+                        </div>
+                        <div
+                            class="checklist-item done flex items-center gap-3 bg-white/5 rounded-xl px-4 py-3 border border-white/5">
+                            <i class="ph-bold ph-check-circle check-icon text-green-400 text-xl shrink-0"></i>
+                            <span class="item-label text-sm text-gray-300">Core Web Vitals Audit</span>
+                        </div>
+                        <div
+                            class="checklist-item done flex items-center gap-3 bg-white/5 rounded-xl px-4 py-3 border border-white/5">
+                            <i class="ph-bold ph-check-circle check-icon text-green-400 text-xl shrink-0"></i>
+                            <span class="item-label text-sm text-gray-300">X (Twitter) Social Profile</span>
+                        </div>
+                    </div>
+
+                    <!-- Bottom callout -->
+                    <div class="bg-green-500/5 border border-green-500/20 rounded-xl p-5 flex items-start gap-4">
+                        <i class="ph-bold ph-shield-check text-green-400 text-3xl shrink-0 mt-1"></i>
+                        <div>
+                            <p class="font-bold text-white mb-1">Standard Audit: 100% Complete</p>
+                            <p class="text-sm text-gray-400">All on-page, off-page, and standard technical SEO items
+                                were resolved. The audit tool reported no critical or high-priority issues. Yet the site
+                                still loaded in <strong class="text-red-400">30 seconds</strong>. This is where most SEO
+                                campaigns stop. We went deeper.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ── SECTION 2: AUDIT DASHBOARD ── -->
+            <section class="mb-24 max-w-5xl mx-auto">
+                <div class="text-center mb-12">
+                    <h2 class="text-3xl font-bold mb-3">Phase 2: <span class="text-orange-400">Engineering Audit</span>
+                        — The Real Data</h2>
+                    <p class="text-gray-400 max-w-xl mx-auto">We went past the SEO checklist and ran a raw network
+                        performance audit. Here's what the browser actually measured.</p>
+                </div>
+
+                <!-- Speed Stats -->
+                <div class="grid md:grid-cols-3 gap-6 mb-8">
+                    <div
+                        class="bg-gradient-to-br from-gray-900 to-black border border-white/10 rounded-2xl p-6 text-center hover:border-green-400/30 transition-colors">
+                        <div class="text-4xl font-bold text-green-400 mb-1 font-mono">0.0s</div>
+                        <div class="text-xs text-gray-500 uppercase tracking-wider mb-2">Server Response</div>
+                        <div class="flex items-center justify-center gap-1 text-green-400 text-xs"><i
+                                class="ph-bold ph-check-circle"></i> Within Benchmark</div>
+                    </div>
+                    <div
+                        class="bg-gradient-to-br from-gray-900 to-black border border-orange-500/30 rounded-2xl p-6 text-center pulse-orange">
+                        <div class="text-4xl font-bold text-orange-400 mb-1 font-mono">7.0s</div>
+                        <div class="text-xs text-gray-500 uppercase tracking-wider mb-2">All Content Loaded</div>
+                        <div class="flex items-center justify-center gap-1 text-orange-400 text-xs"><i
+                                class="ph-bold ph-warning"></i> High — needs fix</div>
+                    </div>
+                    <div
+                        class="bg-gradient-to-br from-gray-900 to-black border border-red-500/30 rounded-2xl p-6 text-center">
+                        <div class="text-4xl font-bold text-red-400 mb-1 font-mono">15.8s</div>
+                        <div class="text-xs text-gray-500 uppercase tracking-wider mb-2">All Scripts Complete</div>
+                        <div class="flex items-center justify-center gap-1 text-red-400 text-xs"><i
+                                class="ph-bold ph-x-circle"></i> Critical — site-blocking</div>
+                    </div>
+                </div>
+
+                <!-- Download Size + Compression -->
+                <div class="grid md:grid-cols-2 gap-6">
+                    <!-- Download Breakdown -->
+                    <div class="bg-gradient-to-br from-gray-900 to-black border border-white/10 rounded-2xl p-6">
+                        <h3 class="font-bold text-white mb-1">Download Page Size</h3>
+                        <p class="text-xs text-gray-500 mb-5">Total: 3.75 MB transferred</p>
+                        <div class="space-y-3">
+                            <div>
+                                <div class="flex justify-between text-xs mb-1"><span
+                                        class="text-gray-400">HTML</span><span class="text-white font-mono">0.14
+                                        MB</span></div>
+                                <div class="w-full bg-white/5 rounded-full h-2">
+                                    <div class="bar-fill bg-red-400" style="width:3.7%"></div>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="flex justify-between text-xs mb-1"><span
+                                        class="text-gray-400">CSS</span><span class="text-white font-mono">0.19
+                                        MB</span></div>
+                                <div class="w-full bg-white/5 rounded-full h-2">
+                                    <div class="bar-fill bg-sky-400" style="width:5.1%"></div>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="flex justify-between text-xs mb-1"><span
+                                        class="text-gray-400">JavaScript</span><span class="text-white font-mono">1.44
+                                        MB</span></div>
+                                <div class="w-full bg-white/5 rounded-full h-2">
+                                    <div class="bar-fill bg-yellow-400" style="width:38.4%"></div>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="flex justify-between text-xs mb-1"><span
+                                        class="text-gray-400">Images</span><span class="text-white font-mono">1.72
+                                        MB</span></div>
+                                <div class="w-full bg-white/5 rounded-full h-2">
+                                    <div class="bar-fill bg-blue-400" style="width:45.9%"></div>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="flex justify-between text-xs mb-1"><span
+                                        class="text-gray-400">Other</span><span class="text-white font-mono">0.26
+                                        MB</span></div>
+                                <div class="w-full bg-white/5 rounded-full h-2">
+                                    <div class="bar-fill bg-gray-400" style="width:6.9%"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Compression Rates -->
+                    <div class="bg-gradient-to-br from-gray-900 to-black border border-white/10 rounded-2xl p-6">
+                        <h3 class="font-bold text-white mb-1">Compression Rates (Gzip / Brotli)</h3>
+                        <p class="text-xs text-gray-500 mb-5">Overall: 63% — uncompressed total was 10.21 MB</p>
+                        <div class="space-y-3">
+                            <div>
+                                <div class="flex justify-between text-xs mb-1"><span
+                                        class="text-gray-400">HTML</span><span
+                                        class="text-green-400 font-mono font-bold">77%</span></div>
+                                <div class="w-full bg-white/5 rounded-full h-2">
+                                    <div class="bar-fill bg-green-400" style="width:77%"></div>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="flex justify-between text-xs mb-1"><span
+                                        class="text-gray-400">CSS</span><span
+                                        class="text-green-400 font-mono font-bold">81%</span></div>
+                                <div class="w-full bg-white/5 rounded-full h-2">
+                                    <div class="bar-fill bg-green-400" style="width:81%"></div>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="flex justify-between text-xs mb-1"><span
+                                        class="text-gray-400">JavaScript</span><span
+                                        class="text-yellow-400 font-mono font-bold">73%</span></div>
+                                <div class="w-full bg-white/5 rounded-full h-2">
+                                    <div class="bar-fill bg-yellow-400" style="width:73%"></div>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="flex justify-between text-xs mb-1"><span
+                                        class="text-gray-400">Images</span><span
+                                        class="text-red-400 font-mono font-bold">37%</span></div>
+                                <div class="w-full bg-white/5 rounded-full h-2">
+                                    <div class="bar-fill bg-red-400" style="width:37%"></div>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="flex justify-between text-xs mb-1"><span
+                                        class="text-gray-400">Other</span><span
+                                        class="text-orange-400 font-mono font-bold">52%</span></div>
+                                <div class="w-full bg-white/5 rounded-full h-2">
+                                    <div class="bar-fill bg-orange-400" style="width:52%"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ── SECTION 3: ROOT CAUSE ANALYSIS ── -->
+            <section class="mb-24 max-w-5xl mx-auto">
+                <div class="text-center mb-12">
+                    <h2 class="text-3xl font-bold mb-3">Phase 3: <span class="text-red-400">Root Cause Analysis</span>
+                    </h2>
+                    <p class="text-gray-400 max-w-xl mx-auto">Two distinct hardware and software bottlenecks, happening
+                        sequentially, were responsible for the 30-second delay.</p>
+                </div>
+
+                <div class="space-y-8">
+
+                    <!-- Bottleneck 1 -->
+                    <div
+                        class="relative bg-gradient-to-br from-red-950/30 to-black border border-red-500/30 rounded-2xl p-8 overflow-hidden">
+                        <div class="absolute top-0 right-0 p-6 opacity-10">
+                            <i class="ph-bold ph-database text-red-400 text-[8rem]"></i>
+                        </div>
+                        <div class="relative z-10">
+                            <div class="flex items-center gap-3 mb-4">
+                                <div
+                                    class="w-10 h-10 rounded-full bg-red-500/20 border border-red-500/40 flex items-center justify-center text-red-400 font-bold text-lg shrink-0">
+                                    1</div>
+                                <h3 class="text-xl font-bold text-white">Database &amp; Compute Bottleneck</h3>
+                                <span
+                                    class="ml-auto px-3 py-1 bg-red-500/10 border border-red-500/30 rounded-full text-red-400 text-xs font-mono font-bold">+29,990
+                                    ms</span>
+                            </div>
+                            <p class="text-gray-300 leading-relaxed mb-6">The 29.99-second load time for the initial
+                                HTML document means the <strong class="text-white">origin server is hanging</strong>.
+                                The monolithic WordPress/Elementor architecture forces the server to execute heavy,
+                                unoptimised PHP and query the MySQL database from scratch for every single incoming
+                                connection — producing the page dynamically every time.</p>
+
+                            <div class="grid md:grid-cols-2 gap-4">
+                                <div class="bg-red-500/5 border border-red-500/20 rounded-xl p-5">
+                                    <div class="flex items-center gap-2 mb-3">
+                                        <i class="ph-bold ph-x-circle text-red-400"></i>
+                                        <span class="text-sm font-bold text-red-400">My Client — Dynamic
+                                            Rendering</span>
+                                    </div>
+                                    <ul class="space-y-2 text-sm text-gray-400">
+                                        <li class="flex items-start gap-2"><i
+                                                class="ph-bold ph-arrow-right text-red-500 mt-1 shrink-0"></i> WordPress
+                                            + Elementor (monolithic stack)</li>
+                                        <li class="flex items-start gap-2"><i
+                                                class="ph-bold ph-arrow-right text-red-500 mt-1 shrink-0"></i> PHP
+                                            executes on every request</li>
+                                        <li class="flex items-start gap-2"><i
+                                                class="ph-bold ph-arrow-right text-red-500 mt-1 shrink-0"></i> MySQL
+                                            queried cold — no cache layer</li>
+                                        <li class="flex items-start gap-2"><i
+                                                class="ph-bold ph-arrow-right text-red-500 mt-1 shrink-0"></i> TTFB:
+                                            <strong class="text-red-400">~29,990 ms</strong>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="bg-green-500/5 border border-green-500/20 rounded-xl p-5">
+                                    <div class="flex items-center gap-2 mb-3">
+                                        <i class="ph-bold ph-check-circle text-green-400"></i>
+                                        <span class="text-sm font-bold text-green-400">Competitor — Server-Side
+                                            Cache</span>
+                                    </div>
+                                    <ul class="space-y-2 text-sm text-gray-400">
+                                        <li class="flex items-start gap-2"><i
+                                                class="ph-bold ph-arrow-right text-green-500 mt-1 shrink-0"></i>
+                                            Pre-compiled flat HTML files served instantly</li>
+                                        <li class="flex items-start gap-2"><i
+                                                class="ph-bold ph-arrow-right text-green-500 mt-1 shrink-0"></i> Zero
+                                            real-time database computation</li>
+                                        <li class="flex items-start gap-2"><i
+                                                class="ph-bold ph-arrow-right text-green-500 mt-1 shrink-0"></i>
+                                            Edge-cached HTML delivered globally</li>
+                                        <li class="flex items-start gap-2"><i
+                                                class="ph-bold ph-arrow-right text-green-500 mt-1 shrink-0"></i> TTFB:
+                                            <strong class="text-green-400">~1,350 ms</strong>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Arrow -->
+                    <div class="flex justify-center">
+                        <div class="flex flex-col items-center gap-1 text-gray-600">
+                            <div class="w-0.5 h-6 bg-white/10"></div>
+                            <i class="ph-bold ph-arrow-down text-white/20 text-2xl"></i>
+                            <p class="text-xs text-gray-600 font-mono">After HTML loads, next bottleneck hits:</p>
+                            <i class="ph-bold ph-arrow-down text-white/20 text-2xl"></i>
+                            <div class="w-0.5 h-6 bg-white/10"></div>
+                        </div>
+                    </div>
+
+                    <!-- Bottleneck 2 -->
+                    <div
+                        class="relative bg-gradient-to-br from-orange-950/30 to-black border border-orange-500/30 rounded-2xl p-8 overflow-hidden">
+                        <div class="absolute top-0 right-0 p-6 opacity-10">
+                            <i class="ph-bold ph-film-strip text-orange-400 text-[8rem]"></i>
+                        </div>
+                        <div class="relative z-10">
+                            <div class="flex items-center gap-3 mb-4">
+                                <div
+                                    class="w-10 h-10 rounded-full bg-orange-500/20 border border-orange-500/40 flex items-center justify-center text-orange-400 font-bold text-lg shrink-0">
+                                    2</div>
+                                <h3 class="text-xl font-bold text-white">Network Pipeline Saturation</h3>
+                                <span
+                                    class="ml-auto px-3 py-1 bg-orange-500/10 border border-orange-500/30 rounded-full text-orange-400 text-xs font-mono font-bold">~70
+                                    MB VIDEO</span>
+                            </div>
+                            <p class="text-gray-300 leading-relaxed mb-6">Immediately after the server finally delivers
+                                the DOM, the application forces the browser to download roughly <strong
+                                    class="text-white">70 MB of MP4 video chunks</strong> as a background hero. Browsers
+                                enforce a hard limit on concurrent connections — these massive video chunks <strong
+                                    class="text-orange-300">saturate the bandwidth pipe</strong>, causing critical
+                                downstream assets (CSS and JS) to enter a <code
+                                    class="bg-white/10 px-1.5 py-0.5 rounded text-orange-300 text-xs">Stalled</code>
+                                state for up to 30 additional seconds.</p>
+
+                            <div class="grid md:grid-cols-2 gap-4">
+                                <div class="bg-orange-500/5 border border-orange-500/20 rounded-xl p-5">
+                                    <div class="flex items-center gap-2 mb-3">
+                                        <i class="ph-bold ph-x-circle text-orange-400"></i>
+                                        <span class="text-sm font-bold text-orange-400">My Client — Auto-play MP4
+                                            Hero</span>
+                                    </div>
+                                    <ul class="space-y-2 text-sm text-gray-400">
+                                        <li class="flex items-start gap-2"><i
+                                                class="ph-bold ph-arrow-right text-orange-500 mt-1 shrink-0"></i> 70 MB
+                                            MP4 loaded on initial paint</li>
+                                        <li class="flex items-start gap-2"><i
+                                                class="ph-bold ph-arrow-right text-orange-500 mt-1 shrink-0"></i>
+                                            Saturates all browser concurrent connections</li>
+                                        <li class="flex items-start gap-2"><i
+                                                class="ph-bold ph-arrow-right text-orange-500 mt-1 shrink-0"></i> CSS/JS
+                                            enter "Stalled" state — render blocked</li>
+                                        <li class="flex items-start gap-2"><i
+                                                class="ph-bold ph-arrow-right text-orange-500 mt-1 shrink-0"></i>
+                                            Secondary delay: <strong class="text-orange-400">+30 seconds</strong></li>
+                                    </ul>
+                                </div>
+                                <div class="bg-green-500/5 border border-green-500/20 rounded-xl p-5">
+                                    <div class="flex items-center gap-2 mb-3">
+                                        <i class="ph-bold ph-check-circle text-green-400"></i>
+                                        <span class="text-sm font-bold text-green-400">Competitor — Modern WebP
+                                            Hero</span>
+                                    </div>
+                                    <ul class="space-y-2 text-sm text-gray-400">
+                                        <li class="flex items-start gap-2"><i
+                                                class="ph-bold ph-arrow-right text-green-500 mt-1 shrink-0"></i> Single
+                                            WebP image for initial viewport</li>
+                                        <li class="flex items-start gap-2"><i
+                                                class="ph-bold ph-arrow-right text-green-500 mt-1 shrink-0"></i> Only
+                                            <strong class="text-green-400">60.4 kB</strong> transferred (vs 70 MB)
+                                        </li>
+                                        <li class="flex items-start gap-2"><i
+                                                class="ph-bold ph-arrow-right text-green-500 mt-1 shrink-0"></i> Zero
+                                            bandwidth saturation — pipeline free</li>
+                                        <li class="flex items-start gap-2"><i
+                                                class="ph-bold ph-arrow-right text-green-500 mt-1 shrink-0"></i> All
+                                            structural code executes instantly</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ── SECTION 4: ENGINEERING ACTION ITEMS ── -->
+            <section class="mb-24 max-w-5xl mx-auto">
+                <div class="text-center mb-12">
+                    <h2 class="text-3xl font-bold mb-3">Phase 4: <span class="text-primary">Engineering Action
+                            Items</span></h2>
+                    <p class="text-gray-400 max-w-xl mx-auto">The prescribed remediation, formatted as sprint-ready
+                        engineering tickets to achieve parity with the benchmark architecture.</p>
+                </div>
+
+                <div class="space-y-6">
+
+                    <!-- Ticket 1 -->
+                    <div
+                        class="bg-gradient-to-br from-gray-900 to-black border border-white/10 rounded-2xl overflow-hidden hover:border-primary/40 transition-colors">
+                        <div class="flex items-center justify-between p-6 border-b border-white/5">
+                            <div class="flex items-center gap-4">
+                                <div
+                                    class="w-10 h-10 rounded-lg bg-primary/10 border border-primary/30 flex items-center justify-center text-primary shrink-0">
+                                    <i class="ph-bold ph-hard-drives"></i>
+                                </div>
+                                <div>
+                                    <p class="text-xs font-mono text-primary mb-0.5">TICKET-001 / HIGH PRIORITY</p>
+                                    <h3 class="font-bold text-white">Implement Server-Side Page Caching</h3>
+                                </div>
+                            </div>
+                            <div class="hidden md:block text-right">
+                                <div class="text-xs text-gray-500 mb-1">TTFB Target</div>
+                                <div class="font-mono font-bold"><span class="text-red-400 line-through">30,000
+                                        ms</span> <span class="text-green-400">→ &lt;1,000 ms</span></div>
+                            </div>
+                        </div>
+                        <div class="p-6">
+                            <p class="text-gray-400 text-sm mb-4">Deploy a caching layer to store fully compiled HTML
+                                documents. The server will serve pre-rendered pages from memory instead of hitting the
+                                database on every request.</p>
+                            <div class="grid md:grid-cols-3 gap-3 mb-4">
+                                <div class="bg-white/5 rounded-xl p-4 text-center border border-white/5">
+                                    <div class="text-primary text-2xl mb-2"><i class="ph-bold ph-cube"></i></div>
+                                    <div class="text-sm font-bold text-white mb-1">Redis</div>
+                                    <div class="text-xs text-gray-500">In-memory key-value store</div>
+                                </div>
+                                <div class="bg-white/5 rounded-xl p-4 text-center border border-white/5">
+                                    <div class="text-secondary text-2xl mb-2"><i class="ph-bold ph-lightning"></i></div>
+                                    <div class="text-sm font-bold text-white mb-1">Memcached</div>
+                                    <div class="text-xs text-gray-500">High-performance object cache</div>
+                                </div>
+                                <div class="bg-white/5 rounded-xl p-4 text-center border border-white/5">
+                                    <div class="text-orange-400 text-2xl mb-2"><i class="ph-bold ph-globe"></i></div>
+                                    <div class="text-sm font-bold text-white mb-1">Edge Cache (CDN)</div>
+                                    <div class="text-xs text-gray-500">Cloudflare / Fastly layer</div>
+                                </div>
+                            </div>
+                            <div class="bg-primary/5 border border-primary/20 rounded-lg p-3 text-xs text-gray-400">
+                                <strong class="text-primary">Expected Outcome:</strong> TTFB drops from 30,000 ms to
+                                under 1,000 ms. The server now skips PHP execution and MySQL queries entirely for cached
+                                pages, serving static HTML at memory speed.
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Ticket 2 -->
+                    <div
+                        class="bg-gradient-to-br from-gray-900 to-black border border-white/10 rounded-2xl overflow-hidden hover:border-orange-400/40 transition-colors">
+                        <div class="flex items-center justify-between p-6 border-b border-white/5">
+                            <div class="flex items-center gap-4">
+                                <div
+                                    class="w-10 h-10 rounded-lg bg-orange-500/10 border border-orange-500/30 flex items-center justify-center text-orange-400 shrink-0">
+                                    <i class="ph-bold ph-film-strip"></i>
+                                </div>
+                                <div>
+                                    <p class="text-xs font-mono text-orange-400 mb-0.5">TICKET-002 / HIGH PRIORITY</p>
+                                    <h3 class="font-bold text-white">Halt Auto-Loading Media on Initial Paint</h3>
+                                </div>
+                            </div>
+                            <div class="hidden md:block text-right">
+                                <div class="text-xs text-gray-500 mb-1">Payload Reduction</div>
+                                <div class="font-mono font-bold"><span class="text-red-400 line-through">70 MB</span>
+                                    <span class="text-green-400">→ &lt;100 KB</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="p-6">
+                            <p class="text-gray-400 text-sm mb-5">The background MP4 must not execute during initial DOM
+                                construction. Two viable engineering paths:</p>
+
+                            <div class="grid md:grid-cols-2 gap-4 mb-4">
+                                <!-- Option A -->
+                                <div class="bg-white/5 border border-white/10 rounded-xl p-5">
+                                    <div class="text-xs font-mono text-green-400 mb-3">▶ OPTION A — Recommended</div>
+                                    <h4 class="font-bold text-white mb-2 text-sm">Replace with WebP / AVIF Animation
+                                    </h4>
+                                    <p class="text-xs text-gray-400 mb-3">Convert the video to a highly compressed
+                                        looping WebP or AVIF animation. A 10-second visual loop can be under 200 KB vs
+                                        70 MB.</p>
+                                    <div class="flex flex-wrap gap-2">
+                                        <span
+                                            class="px-2 py-1 bg-green-500/10 border border-green-500/20 rounded text-xs text-green-400">Zero
+                                            JS required</span>
+                                        <span
+                                            class="px-2 py-1 bg-green-500/10 border border-green-500/20 rounded text-xs text-green-400">99.7%
+                                            smaller</span>
+                                    </div>
+                                </div>
+                                <!-- Option B -->
+                                <div class="bg-white/5 border border-white/10 rounded-xl p-5">
+                                    <div class="text-xs font-mono text-blue-400 mb-3">▶ OPTION B — If Video is Mandatory
+                                    </div>
+                                    <h4 class="font-bold text-white mb-2 text-sm">Defer Video with JS</h4>
+                                    <p class="text-xs text-gray-400 mb-3">Inject <code
+                                            class="bg-white/10 px-1 py-0.5 rounded text-blue-300">preload="none"</code>
+                                        and a static poster image. Use JS to trigger download only after <code
+                                            class="bg-white/10 px-1 py-0.5 rounded text-blue-300">window.onload</code>
+                                        fires.</p>
+                                    <div class="code-block text-xs">
+                                        <span class="code-tag">&lt;video</span><br />
+                                        &nbsp;&nbsp;<span class="code-attr">preload</span>=<span
+                                            class="code-val">"none"</span><br />
+                                        &nbsp;&nbsp;<span class="code-attr">poster</span>=<span
+                                            class="code-val">"hero-still.webp"</span><br />
+                                        &nbsp;&nbsp;<span class="code-attr">id</span>=<span
+                                            class="code-val">"hero-video"</span><br />
+                                        <span class="code-tag">&gt;&lt;/video&gt;</span><br />
+                                        <span class="code-comment">// Deferred in JS:</span><br />
+                                        window.onload = () =&gt; {<br />
+                                        &nbsp;&nbsp;v.src = <span class="code-val">'hero.mp4'</span>; v.play();<br />
+                                        };
+                                    </div>
+                                </div>
+                            </div>
+                            <div
+                                class="bg-orange-500/5 border border-orange-500/20 rounded-lg p-3 text-xs text-gray-400">
+                                <strong class="text-orange-400">Expected Outcome:</strong> CSS and JS files are no
+                                longer "Stalled" by video chunk downloads. Critical Rendering Path is cleared, reducing
+                                total scripts complete from 15.8s to under 3s.
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Ticket 3 -->
+                    <div
+                        class="bg-gradient-to-br from-gray-900 to-black border border-white/10 rounded-2xl overflow-hidden hover:border-purple-400/40 transition-colors">
+                        <div class="flex items-center justify-between p-6 border-b border-white/5">
+                            <div class="flex items-center gap-4">
+                                <div
+                                    class="w-10 h-10 rounded-lg bg-purple-500/10 border border-purple-500/30 flex items-center justify-center text-purple-400 shrink-0">
+                                    <i class="ph-bold ph-image-square"></i>
+                                </div>
+                                <div>
+                                    <p class="text-xs font-mono text-purple-400 mb-0.5">TICKET-003 / MEDIUM PRIORITY</p>
+                                    <h3 class="font-bold text-white">Optimise Image Compression Pipeline</h3>
+                                </div>
+                            </div>
+                            <div class="hidden md:block text-right">
+                                <div class="text-xs text-gray-500 mb-1">Image Compression</div>
+                                <div class="font-mono font-bold"><span class="text-red-400 line-through">37%</span>
+                                    <span class="text-green-400">→ target 80%+</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="p-6">
+                            <p class="text-gray-400 text-sm mb-4">Image compression is at only 37% — the lowest of all
+                                asset types. Images represent 1.72 MB of the 3.75 MB total. Converting all images to
+                                WebP/AVIF with progressive loading would cut this to under 300 KB.</p>
+                            <div class="grid grid-cols-2 md:grid-cols-4 gap-3">
+                                <div class="bg-white/5 rounded-xl p-3 text-center">
+                                    <div class="text-xs text-gray-500 mb-1">Convert to</div>
+                                    <div class="text-sm font-bold text-purple-400">WebP / AVIF</div>
+                                </div>
+                                <div class="bg-white/5 rounded-xl p-3 text-center">
+                                    <div class="text-xs text-gray-500 mb-1">Enable</div>
+                                    <div class="text-sm font-bold text-purple-400">Lazy Loading</div>
+                                </div>
+                                <div class="bg-white/5 rounded-xl p-3 text-center">
+                                    <div class="text-xs text-gray-500 mb-1">Use</div>
+                                    <div class="text-sm font-bold text-purple-400">Responsive srcset</div>
+                                </div>
+                                <div class="bg-white/5 rounded-xl p-3 text-center">
+                                    <div class="text-xs text-gray-500 mb-1">Serve via</div>
+                                    <div class="text-sm font-bold text-purple-400">CDN Edge</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </section>
+
+            <!-- ── SECTION 5: THE NARRATIVE ── -->
+            <section class="max-w-4xl mx-auto mb-20">
+                <div
+                    class="bg-gradient-to-br from-orange-950/20 via-gray-900 to-black border border-orange-400/20 rounded-2xl p-8 md:p-12 relative overflow-hidden">
+                    <!-- Top glow line -->
+                    <div
+                        class="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-orange-400/60 to-transparent">
+                    </div>
+
+                    <div class="text-center mb-10">
+                        <div class="inline-flex items-center gap-2 text-orange-400 text-sm font-mono mb-4">
+                            <i class="ph-bold ph-code"></i>
+                            THE TAKEAWAY
+                        </div>
+                        <h2 class="text-3xl md:text-4xl font-bold text-white mb-4">When the Checklist is <span
+                                class="text-green-400">Green</span>,<br />the Next Frontier is <span
+                                class="text-orange-400">Computer Science</span></h2>
+                        <p class="text-gray-400 max-w-2xl mx-auto leading-relaxed">
+                            Traditional SEO ends at the checklist. Advanced SEO begins where the checklist stops — at
+                            the intersection of search algorithms and systems engineering. By diagnosing both the
+                            server-compute bottleneck and the network saturation issue, we identified a path to match
+                            the competitor's performance not by guessing, but by <strong class="text-white">reading the
+                                raw network waterfall like an engineer</strong>.
+                        </p>
+                    </div>
+
+                    <div class="grid md:grid-cols-3 gap-6">
+                        <div class="text-center p-6 bg-white/5 rounded-xl border border-white/5">
+                            <div class="text-3xl font-bold text-red-400 font-mono mb-1">30s</div>
+                            <div class="text-xs text-gray-500 uppercase tracking-wider">Before: Load Time</div>
+                        </div>
+                        <div
+                            class="text-center p-6 bg-white/5 rounded-xl border border-orange-400/20 flex flex-col items-center justify-center">
+                            <i class="ph-bold ph-arrow-right text-orange-400 text-3xl mb-2"></i>
+                            <div class="text-sm text-gray-400">Engineering Remediation</div>
+                        </div>
+                        <div class="text-center p-6 bg-white/5 rounded-xl border border-green-500/20">
+                            <div class="text-3xl font-bold text-green-400 font-mono mb-1">&lt;1s</div>
+                            <div class="text-xs text-gray-500 uppercase tracking-wider">After: Target TTFB</div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="border-t border-white/10 py-12 bg-black">
+        <div class="container mx-auto px-6 text-center text-gray-600">
+            <p>&copy; 2024 Balagangatharan J. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script type="module" src="/src/main.js"></script>
+</body>
+
+</html>
